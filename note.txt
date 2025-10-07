@@ -3,3 +3,31 @@ express is a web framework that work only with backend Apis.
 
 difference between:
 res.send() & res.end();
+
+------------------------------
+
+How express works behind the scene:
+
+we uses app function which is handler function of http;
+when we start server using app behind the scene it uses http's createServer function.
+so express just make our work easy by making some optimisations.
+
+const server = http.createServer((req, res, next) => {
+  res.send('http server running);
+})
+
+this part is equalent to app function:
+
+(req, res, next) => {
+  res.send('http server running);
+}
+so we can do this instead:
+
+const server = http.createServer(app)
+
+Internally app.listen() method write this same code inside app.listen method:
+app.listen = function listen(){
+    http.createServer((req, res, next) => {
+      res.send('http server running);
+    })
+}
