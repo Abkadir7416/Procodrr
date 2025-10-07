@@ -1,0 +1,5 @@
+Node.js is not just used for backend it controls the whole system,
+express is a web framework that work only with backend Apis.
+
+difference between:
+res.send() & res.end();
