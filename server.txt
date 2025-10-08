@@ -1,0 +1,12 @@
+In this case when we call '/test' API then both first and second middleware are called.
+
+- in first middleware with route '/', req.url is showing '/test'
+- in second middleware with route '/test', req.url is showing '/'
+
+if we call only '/' API, then only first middleware with route '/' is called.
+
+
+curl --location 'http://127.0.0.1:3000/avatar/update-users' \
+--data '{
+    "totalUsers": 5000
+}'
