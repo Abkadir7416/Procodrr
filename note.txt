@@ -1,33 +1,26 @@
-Node.js is not just used for backend it controls the whole system,
-express is a web framework that work only with backend Apis.
 
-difference between:
-res.send() & res.end();
-
-------------------------------
-
-How express works behind the scene:
-
-we uses app function which is handler function of http;
-when we start server using app behind the scene it uses http's createServer function.
-so express just make our work easy by making some optimisations.
-
-const server = http.createServer((req, res, next) => {
-  res.send('http server running);
+Now here we had added global middle property.
+this middleware will be called for every api call.
+------------------------------------
+app.use((req, res, next) => {
+  console.log('middleware')
+  console.log(req.url)
+  next()
 })
 
-this part is equalent to app function:
+app.get('/',  (req, res) => {
+  console.log('home ')
+  console.log(req.url)
+  res.send('Home Page');
+})
 
-(req, res, next) => {
-  res.send('http server running);
-}
-so we can do this instead:
+app.get('/test', (req, res) => {
+  console.log('test')
+  console.log(req.url);
+  console.log(req.route)
+  res.send('Test Page');
+})
 
-const server = http.createServer(app)
+// Note: In this case we will get req.url value same in 
+// both middleware and APIs.
 
-Internally app.listen() method write this same code inside app.listen method:
-app.listen = function listen(){
-    http.createServer((req, res, next) => {
-      res.send('http server running);
-    })
-}
